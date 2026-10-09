@@ -1,0 +1,53 @@
+# Metadaten des MekoTools-Werkzeugs "Stop Motion" (Eagle Animation).
+# Schema: schema/tool.schema.json im Katalog-Repo. Werte ohne Beleg werden
+# nicht eingetragen. Die id ist stabil und wird nie umbenannt.
+
+schema_version: 1
+
+id: mekotools-stopmotion
+titel: Stop Motion
+kurzbeschreibung: 'Bild für Bild eine eigene Animation drehen: Figur aufbauen, ein Foto aufnehmen, leicht verschieben, wieder fotografieren. Aus vielen Einzelbildern wird ein Film — im Browser, ohne Konto; die Aufnahmen bleiben auf dem Gerät.'
+themen: [creation]
+unterthemen: [creation/film]
+stufe: 2
+schlagworte: [video]
+
+laufzeit: browser
+betrieb: eigen
+reifegrad: stabil
+aufwand_lehrkraft: niedrig
+
+zielgruppe: [primar, sek1]
+geraete: [desktop, tablet]
+kamera: optional
+mikrofon: nein
+
+bildungsbezug:
+  kompetenzen:
+    - produzieren-praesentieren
+    - analysieren-reflektieren
+    - kommunizieren-kooperieren
+  faecher: [kunst, sachunterricht, deutsch]
+  lernziele:
+    - Eine Figur so verschieben, dass aus vielen Einzelbildern eine erkennbare Bewegung entsteht
+    - Die Wirkung von Bildern pro Sekunde und der Größe des Schrittes in eigenen Worten beschreiben
+    - Eine kurze Animation zu einer eigenen Idee fertigstellen und als Video sichern
+
+technik:
+  artefakte:
+    - typ: image
+      referenz: ghcr.io/mekotools/stopmotion:latest
+      sichtbarkeit: public
+      geprueft_am: '2026-10-09'
+  dienst_url: https://stopmotion.mekotools.de
+  port: 80
+  quellcode: https://github.com/brick-a-brack/eagle-animation
+  lizenz: GPL-3.0
+  lizenz_link: https://github.com/brick-a-brack/eagle-animation/blob/master/LICENSE
+
+doku:
+  anleitung: docs/anleitung.md
+  didaktik: docs/didaktik.md
+  unterrichtsentwurf: docs/unterrichtsentwurf.md
+
+stand: '2026-10-09'
