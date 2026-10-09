@@ -23,8 +23,15 @@ Fertiges Abbild der Web-Fassung von **Eagle Animation** für den MekoTools-Katal
 
 Gebaut wird aus dem Archiv-Abzug des Originals, nicht aus einer Zweigspitze:
 
-- Zweig `master` (dort liegen die Veröffentlichungen), Fassung **2.19.0**
-- Kennung `8624b035ca5951d28cfceaf89931141cb3e1aac9` (2026-10-06)
+- Zweig `master`, Kennung `8624b035ca5951d28cfceaf89931141cb3e1aac9` (2026-10-06)
+- Fassung laut `package.json` in diesem Stand: **2.18.4** (erscheint in der
+  Oberfläche unten links, dort zusammen mit der Baukennung, z. B. `web-8624b03`)
+
+Warum `master`: die amtliche Web-Fassung des Projekts wird genau aus diesem
+Zweig gebaut (der Bau-Ablauf des Originals lädt die Web-Ausgabe nur bei einem
+Lauf auf `master` hoch). Die Veröffentlichungsmarke `v2.19.0` gehört zur
+Android-Linie und liegt nicht auf `master` — der Stand dort nennt weiterhin
+2.18.4.
 
 Beim Nachziehen einer neuen Fassung: Kennung im `Dockerfile` an beiden Stellen
 (`QUELLE`, `FASSUNG`) ändern, Bau laufen lassen, Werkzeugseite und
@@ -32,20 +39,26 @@ Katalogeintrag mit dem neuen Prüfdatum versehen.
 
 ## Änderungen gegenüber dem Original
 
-Es gibt genau **eine** inhaltliche Änderung:
+Es gibt genau **drei** Änderungen, alle in `scripts/anpassen.py` mit
+Ankerprüfung (Trefferzahl wird geprüft, sonst bricht der Bau ab):
 
 1. **Analyse abgeschaltet.** In `src/config.js` wird die PostHog-Kennung auf
    einen leeren Wert gesetzt. Damit läuft `posthog.init()` nie, und die
    Oberfläche spricht `us.i.posthog.com` nicht an. Das Projekt selbst
    beschreibt diesen Weg in seiner README (Abschnitt „Telemetry").
-   Die Ankerprüfung in `scripts/anpassen.py` bricht ab, wenn die Zeile nicht
-   mehr genau einmal gefunden wird — so kann kein unbemerkt veränderter
-   Quelltext ausgeliefert werden.
+2. **Vier deutsche Beschriftungen groß geschrieben.** Auf der Startseite stand
+   im Original „projekte", „fotos", „der animation", „favoriten" — im Deutschen
+   sind das Substantive. Geändert werden nur diese vier Werte in
+   `resources/i18n/de.json`.
+3. **Sprachkennung des Dokuments beim Start.** Das Original setzt `<html lang>`
+   erst beim Wechsel der Sprache in den Einstellungen; bei deutscher Oberfläche
+   stand bis dahin „en" im Dokument, was Vorlesehilfen in die falsche Sprache
+   führt. Ergänzt wird eine Zeile am Ende von `src/renderer/i18n.js`.
 
-**Sonst nichts.** Insbesondere wurde die deutsche Sprachdatei nicht angefasst:
-alle im Programm benutzten Beschriftungen haben eine deutsche Fassung. Die acht
-Schlüssel, die nur im englischen Bestand stehen, werden an keiner Stelle im
-Quelltext verwendet (geprüft) und brauchen keine Übersetzung.
+**Die deutsche Sprachdatei ist vollständig:** alle im Quelltext benutzten
+Beschriftungen haben eine deutsche Fassung. Die acht Schlüssel, die nur im
+englischen Bestand stehen, werden an keiner Stelle im Quelltext verwendet
+(geprüft) und brauchen keine Übersetzung.
 
 Der Name des Programms bleibt stehen (Titel, Logo, Fußzeile): wir liefern das
 Original aus, keine umbenannte Kopie. Der Hinweis auf das Original ist Teil der
